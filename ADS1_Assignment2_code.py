@@ -35,6 +35,7 @@ Countries are also selected in upcoming code.'''
     cleaned_data_t = cleaned_data_t.iloc[1:]
     cleaned_data_t.index = pd.to_numeric(cleaned_data_t.index)
     cleaned_data_t['Years'] = cleaned_data_t.index
+    cleaned_data_t.reset_index(drop=True)
     return cleaned_data, cleaned_data_t
 
 
@@ -98,15 +99,17 @@ and Y-axis, Naming the barplot, Create legend in best place'''
     plt.show()
 
 
-def create_boxplot(df, countries, shownotches=True):
+def create_boxplot(data, countries):
     '''Defining the function to create the boxplot,then applyig the dataframe
 into the function, Naming the boxplot.'''
 
-    plt.figure(figsize=(10, 5))
-    plt.boxplot([df[country] for country in countries])
-    plt.title('Cereal production of selected countries from year 2001 to 2020')
-    plt.xticks(range(1, len(countries) + 1), countries)
-    plt.savefig('boxplot.png')
+    sns.set_style("whitegrid")
+    plt.figure(figsize=(10, 8))
+    df = pd.DataFrame({country : data[country] for country in countries})
+    sns.boxplot(data=df)
+    plt.title('Cereal production of selected countries')
+    plt.xlabel('Country Name')
+    plt.ylabel('Values') 
     plt.show()
 
 
@@ -220,7 +223,7 @@ create_barplot(bar_frwt, 'Years', ['China', 'United Kingdom', 'Indonesia',
 
 # Visualisation 4 (Boxplot)
 create_boxplot(cere_t, ['China', 'United Kingdom', 'Indonesia',
-               'India', 'Pakistan', 'United States'], shownotches=True)
+               'India', 'Pakistan', 'United States'])
 
 # Visualisation 5 (Lineplot)
 create_lineplot(acce_t, '% of population',
