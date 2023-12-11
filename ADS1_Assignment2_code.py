@@ -7,6 +7,7 @@ Created on Thu Nov 30 01:24:37 2023
 # import and function
 
 import pandas as pd  # Inputing file (eg, pd.read_csv), Data-processing
+import numpy as np
 import matplotlib.pyplot as plt  # Visualisation
 import seaborn as sns  # Visualisation
 import scipy.stats as stats  # Statistical variable
